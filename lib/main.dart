@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 void main() => runApp(MyApp());
 
@@ -56,6 +57,9 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
+  void callContact(){
+    print('Calling the contact');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,24 +73,106 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        actions: <Widget>[
+          Image(
+           fit: BoxFit.cover,
+            width: 100,
+            image: AssetImage('assets/images/Real.png'),
+          ),
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
+                  child:Text(
+
+                      widget.title
+                  )
+              )
+            ],
+          )
+        ],
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          children: <Widget>[
-            Text(
-              'eSUnisol School Management System',
-              style: new TextStyle(
-                color: Colors.redAccent,
-                decoration: TextDecoration.underline,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              new Text(
+                'EliteSecurityConsultants',
+                style: new TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.redAccent,
+                  decoration: TextDecoration.underline,
+                  fontSize: 30,
+                  letterSpacing: 1
+                ),
               ),
-            )
-          ],
-        )
+//               Align(
+//                 alignment: Alignment.bottomRight,
+//                 child: Image(
+//                   width: 100,
+//                   image: AssetImage('assets/images/Real.png'),
+//                 ),
+//               ),
+               Row(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(20, 0, 40, 0),
+                    child:Image(
+                      width: 100,
+                     height: 100,
+                     image: AssetImage('assets/images/Real.png'),
+                    )
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                      child:Text(
+                        'Your One Stop Software Vendor',
+                        style: new TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.redAccent, decoration: TextDecoration.underline
+                        ),
+                      )
+                  ),
+                  Listener(
+                    onPointerDown: (PointerDownEvent event){
+                      print('Clicked');
+                    },
+                      onPointerMove: (PointerMoveEvent event){
+                        print('moved');
+                        print(event);
+                      },
+                    child:Text(
+                      'Sample Link',
+                      style: new TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline
+                      ),
+                    )
+                  ),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.call),
+                    tooltip: "Call Contact",
+                    onPressed: callContact,
+                    color: Colors.red,
+                  ),
+                  GestureDetector(
+                    onLongPressUp: (){
+                      print('LongPressed up');
+                    },
+                    child:Text('Click to tap'),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
