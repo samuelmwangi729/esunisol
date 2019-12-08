@@ -49,6 +49,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _selectedIndex=0;
+  String dropdownStr='network Security';
 
   void _incrementCounter() {
     setState(() {
@@ -206,6 +207,32 @@ class _MyHomePageState extends State<MyHomePage> {
                     )
                   ),
                 ],
+              ),
+              FlatButton(
+                splashColor: Colors.red,
+                onPressed: ()=>{
+                  print('the button hasbeen clicked'),
+                },
+                child:Text(
+                  'RaisedButton'
+                ),
+                color: Colors.red,
+                textColor: Colors.white,
+              ),
+              DropdownButton <String>(
+                value: dropdownStr,
+                onChanged: (String newValue){
+                  setState(() {
+                    dropdownStr=newValue;
+                  });
+                },
+                items: <String>['network Security','ethical hackig','web hacking']
+                    .map<DropdownMenuItem<String>>((String value){
+                return DropdownMenuItem<String>(
+                    value: value,
+                  child: Text(value),
+                );
+                }).toList()
               ),
               Row(
                 children: <Widget>[
