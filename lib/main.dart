@@ -22,11 +22,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'eSUnisol School Management System'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+
   MyHomePage({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -46,6 +48,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  int _selectedIndex=0;
 
   void _incrementCounter() {
     setState(() {
@@ -57,6 +60,12 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
+  void changeIndex(index){
+    setState(() {
+      _selectedIndex=index;
+    });
+  }
+
   void callContact(){
     print('Calling the contact');
   }
@@ -91,6 +100,50 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           )
         ],
+      ),
+      drawer: Drawer(
+        child:ListView(
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue
+//                gradient: LinearGradient(colors:<Color>[
+//                  Colors.red,
+//                  Colors.deepPurple
+//                ])
+              ),
+              child: Container(
+                child: Column(
+                  children: <Widget>[
+                    Material(
+                      borderRadius: BorderRadius.all(Radius.circular(60.0)),
+                      elevation: 10.0,
+                      child: Image(
+                        width:120,
+                        height: 120,
+                        alignment: Alignment.center,
+                        image: AssetImage('assets/images/Real.png'),
+                      ),
+                    ),
+                    Text(
+                      'EliteSecurityConsultants',style: new TextStyle(
+                      color: Colors.white,
+                      fontSize: 15
+                    ),
+                    )
+                  ],
+                ),
+              ),
+
+            ),
+            CustomListTile(Icons.person,'Profile',()=>{}),
+            CustomListTile(Icons.announcement,'Announcements',()=>{}),
+            CustomListTile(Icons.settings,'Settings',()=>{}),
+            CustomListTile(Icons.accessibility,'About Us',()=>{}),
+            CustomListTile(Icons.settings_overscan,'Version 1.1',()=>{}),
+            CustomListTile(Icons.lock_open,'Logout',()=>{}),
+          ],
+        )
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -174,6 +227,17 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
+     bottomNavigationBar: BottomNavigationBar(
+       items: <BottomNavigationBarItem>[
+         BottomNavigationBarItem(icon: Icon(Icons.home),title: Text("home")),
+         BottomNavigationBarItem(icon: Icon(Icons.school),title: Text("Software")),
+         BottomNavigationBarItem(icon: Icon(Icons.cancel),title: Text("Exit"))
+       ],
+       currentIndex: _selectedIndex,
+       onTap: changeIndex,
+     ),
+
+
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
@@ -181,4 +245,48 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+class CustomListTile extends StatelessWidget{
+  IconData icon;
+  String text;
+  Function onTap;
+  CustomListTile(this.icon,this.text,this.onTap);
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Padding(
+      padding: EdgeInsets.fromLTRB(8.0, 20, 8.0, 0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: Colors.grey.shade400))
+        ),
+          child:InkWell(
+              splashColor: Colors.deepPurpleAccent,
+              onTap: onTap,
+              child:Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    height: 35,
+                    child:Row(
+                      children: <Widget>[
+                        Icon(icon,color: Colors.blue),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+                          child:Text(text,style: new TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0
+                          ),),
+                        )
+                      ],
+                    ),
+                  ),
+                  Icon(Icons.arrow_right),
+                ],
+              )
+          )
+      ),
+    );
+  }
+
 }
