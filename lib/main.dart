@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:esunisol/login.dart';
+import 'package:esunisol/Home.dart';
+import 'package:esunisol/Portfolio.dart';
 
 void main() => runApp(MyApp());
 
@@ -50,7 +53,22 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _selectedIndex=0;
   String dropdownStr='network Security';
+  Widget getPage(int currentIndex){
+    switch(currentIndex){
+      case 0:
+        return Home();
+        break;
+      case 1:
+        return Login();
+        break;
+      case 2:
+        return Portfolio();
+        break;
+      default:
+        return Home();
 
+    }
+  }
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -146,119 +164,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         )
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              new Text(
-                'EliteSecurityConsultants',
-                style: new TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.redAccent,
-                  decoration: TextDecoration.underline,
-                  fontSize: 30,
-                  letterSpacing: 1
-                ),
-              ),
-//               Align(
-//                 alignment: Alignment.bottomRight,
-//                 child: Image(
-//                   width: 100,
-//                   image: AssetImage('assets/images/Real.png'),
-//                 ),
-//               ),
-               Row(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(20, 0, 40, 0),
-                    child:Image(
-                      width: 100,
-                     height: 100,
-                     image: AssetImage('assets/images/Real.png'),
-                    )
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                      child:Text(
-                        'Your One Stop Software Vendor',
-                        style: new TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.redAccent, decoration: TextDecoration.underline
-                        ),
-                      )
-                  ),
-                  Listener(
-                    onPointerDown: (PointerDownEvent event){
-                      print('Clicked');
-                    },
-                      onPointerMove: (PointerMoveEvent event){
-                        print('moved');
-                        print(event);
-                      },
-                    child:Text(
-                      'Sample Link',
-                      style: new TextStyle(
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline
-                      ),
-                    )
-                  ),
-                ],
-              ),
-              FlatButton(
-                splashColor: Colors.red,
-                onPressed: ()=>{
-                  print('the button hasbeen clicked'),
-                },
-                child:Text(
-                  'RaisedButton'
-                ),
-                color: Colors.red,
-                textColor: Colors.white,
-              ),
-              DropdownButton <String>(
-                value: dropdownStr,
-                onChanged: (String newValue){
-                  setState(() {
-                    dropdownStr=newValue;
-                  });
-                },
-                items: <String>['network Security','ethical hackig','web hacking']
-                    .map<DropdownMenuItem<String>>((String value){
-                return DropdownMenuItem<String>(
-                    value: value,
-                  child: Text(value),
-                );
-                }).toList()
-              ),
-              Row(
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.call),
-                    tooltip: "Call Contact",
-                    onPressed: callContact,
-                    color: Colors.red,
-                  ),
-                  GestureDetector(
-                    onLongPressUp: (){
-                      print('LongPressed up');
-                    },
-                    child:Text('Click to tap'),
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+     body:getPage(_selectedIndex),
      bottomNavigationBar: BottomNavigationBar(
        items: <BottomNavigationBarItem>[
          BottomNavigationBarItem(icon: Icon(Icons.home),title: Text("home")),
          BottomNavigationBarItem(icon: Icon(Icons.school),title: Text("Software")),
-         BottomNavigationBarItem(icon: Icon(Icons.cancel),title: Text("Exit"))
+         BottomNavigationBarItem(icon: Icon(Icons.accessibility),title: Text("About Us"))
        ],
        currentIndex: _selectedIndex,
        onTap: changeIndex,
