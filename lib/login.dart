@@ -40,7 +40,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
           colorBlendMode: BlendMode.darken,
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+          padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
           child: new Column(
             children: <Widget>[
               Material(
@@ -73,29 +73,29 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: <Widget>[
                             Padding(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                               child: TextFormField(
                                 decoration: new InputDecoration(
-                                    hintText: "Enter the Username here"
+                                   labelText: 'Username/Email Address'
                                 ),
                                 keyboardType: TextInputType.emailAddress,
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(4),
                               child: TextFormField(
                                 decoration: new InputDecoration(
-                                    hintText: "Enter the Password here"
+                                    labelText: 'Password'
                                 ),
                                 keyboardType: TextInputType.text,
                                 obscureText: true,
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(2),
+                              padding: EdgeInsets.all(0),
                             ),
                             MaterialButton(
                               color: Colors.teal,
