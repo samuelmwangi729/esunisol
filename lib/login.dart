@@ -1,7 +1,31 @@
 import 'package:flutter/material.dart';
 
 
-class Login extends StatelessWidget{
+class Login extends StatefulWidget{
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
+  AnimationController _iconanimationController;
+  Animation<double> _iconAnimation;
+
+  @override
+  void initState(){
+    super.initState();
+    _iconanimationController=new AnimationController(
+      vsync:this,
+      duration: new Duration(
+        milliseconds: 2500
+      ),
+    );
+    _iconAnimation= new CurvedAnimation(
+      parent: _iconanimationController,
+      curve: Curves.easeInQuart
+    );
+    _iconAnimation.addListener(()=>this.setState((){}));
+    _iconanimationController.forward();
+  }
 @override
   Widget build(BuildContext context){
   return new Scaffold(
@@ -25,10 +49,11 @@ class Login extends StatelessWidget{
                 child: Padding(
                   padding: EdgeInsets.all(2),
                   child: Image(
-                    width:75,
-                    height: 75,
+                    width:_iconAnimation.value*100,
+                    height: _iconAnimation.value*100,
                     alignment: Alignment.centerLeft,
                     image: AssetImage('assets/images/Real.png'),
+
                   ),
                 ),
               ),
